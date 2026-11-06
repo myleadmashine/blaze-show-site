@@ -18,10 +18,19 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload site artifact
+      - name: Reassemble compressed website bundle
+        run: |
+          cat deploy-parts/part-*.txt > /tmp/site-bundle.b64
+          base64 --decode /tmp/site-bundle.b64 > /tmp/site-bundle.tar.xz
+          mkdir -p site
+          tar -xJf /tmp/site-bundle.tar.xz -C site
+          test -s site/index.html
+          test -s site/assets/css/styles.css
+          test -s site/assets/js/app.js
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: site
   deploy:
     environment:
       name: github-pages
