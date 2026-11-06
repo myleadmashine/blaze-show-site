@@ -16,10 +16,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Reassemble compressed website bundle
         run: |
           cat deploy-parts/part-*.txt > /tmp/site-bundle.b64
@@ -29,6 +25,10 @@ jobs:
           test -s site/index.html
           test -s site/assets/css/styles.css
           test -s site/assets/js/app.js
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
