@@ -2,7 +2,7 @@
 window.BLAZE_CONFIG = {
   site: {
     name: "BLAZE SHOW",
-    url: "", // После публикации: https://username.github.io/repository/ или свой домен
+    url: "https://myleadmashine.github.io/blaze-show-site/", // GitHub Pages
     city: "Алматы",
     instagramUrl: "https://www.instagram.com/blaze.kz/"
   },
