@@ -5,7 +5,7 @@ These pages are separate landing pages added beside the existing GitHub Pages we
 ## Pages
 - `campaigns/blaze-packages.html` — packages, coupon and three interactive options.
 - `campaigns/bollywood.html` — standalone product landing for “Звёзды Болливуда”.
-- Shared CSS/JS are loaded from `campaigns/campaign.css` and `campaigns/campaign.js`.
+- Shared CSS/JS are loaded from `campaigns/campaign.css` and `campaigns/campaign.js` and `campaigns/campaign-settings.js`.
 
 ## Deploy
 GitHub Actions extracts the existing site bundle and copies these editable source files into `site/campaigns/`. Edit files in `campaign-files/` and commit to the deployment branch. Do not edit the compressed original archive just to change these campaign pages.
@@ -23,10 +23,10 @@ After merge to main:
 6. Match each existing Wistia ID to its real video content; generic placeholders are intentionally used until the match is verified.
 7. Add real telephone / WhatsApp and a working endpoint in `assets/js/config.js`.
 8. Add actual GA4, Google Ads and Yandex Metrica IDs. The campaign code reads GA4 and Yandex Metrica IDs from that file. Microsoft Clarity is also optional.
-9. Add the actual Marquiz public URL in `assets/js/config.js` as `quiz.marquizUrl`. Until that is set, the “Подобрать программу” button opens the coupon form instead of a quiz.
+9. Add the actual public Marquiz URL to `campaign-files/campaign-settings.js` as `window.BLAZE_MARQUIZ_URL`. Until that is set, the “Подобрать программу” button opens the coupon form instead of a quiz.
 10. Verify that a real test lead reaches the receiving system and that the team calendar is updated. A browser page view is not proof that the lead delivery works.
 
-## Coupon and deposit
+Analytics scripts load only after the visitor accepts the analytics banner. Declining analytics does not block the lead form.\n\n## Coupon and deposit
 The public offer describes a 25,000 ₸ discount and at least 10% deposit to reserve the date. The precise eligibility, expiry, payment schedule, refund/cancellation terms and what constitutes a confirmed reservation must be written into the proposal and contract. Do not describe the deposit as non-refundable unless that is expressly agreed and legally checked.
 
 ## Technical notes
