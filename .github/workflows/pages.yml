@@ -28,11 +28,12 @@ jobs:
       - name: Overlay editable campaign pages
         run: |
           mkdir -p site/campaigns
-          cp campaign-files/blaze-packages.html campaign-files/bollywood.html campaign-files/campaign.css campaign-files/campaign.js site/campaigns/
+          cp campaign-files/blaze-packages.html campaign-files/bollywood.html campaign-files/campaign.css campaign-files/campaign.js campaign-files/campaign-settings.js site/campaigns/
           test -s site/campaigns/blaze-packages.html
           test -s site/campaigns/bollywood.html
           test -s site/campaigns/campaign.css
           test -s site/campaigns/campaign.js
+          test -s site/campaigns/campaign-settings.js
           test -s site/assets/js/config.js
       - name: Configure Pages
         uses: actions/configure-pages@v5
