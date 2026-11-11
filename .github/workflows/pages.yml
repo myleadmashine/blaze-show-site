@@ -25,6 +25,15 @@ jobs:
           test -s site/index.html
           test -s site/assets/css/styles.css
           test -s site/assets/js/app.js
+      - name: Add conversion campaign pages
+        run: |
+          cat campaign-parts/part-*.txt > /tmp/campaign-bundle.b64
+          base64 --decode /tmp/campaign-bundle.b64 > /tmp/campaign-bundle.tar.xz
+          tar -xJf /tmp/campaign-bundle.tar.xz -C site
+          test -s site/campaigns/blaze-packages.html
+          test -s site/campaigns/bollywood.html
+          test -s site/campaigns/campaign.css
+          test -s site/campaigns/campaign.js
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
