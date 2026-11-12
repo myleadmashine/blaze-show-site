@@ -3,6 +3,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  pull_request:
+    branches: [main]
 permissions:
   contents: read
   pages: write
@@ -25,6 +27,16 @@ jobs:
           test -s site/index.html
           test -s site/assets/css/styles.css
           test -s site/assets/js/app.js
+      - name: Overlay editable campaign pages
+        run: |
+          mkdir -p site/campaigns
+          cp campaign-files/blaze-packages.html campaign-files/bollywood.html campaign-files/campaign.css campaign-files/campaign.js campaign-files/campaign-settings.js site/campaigns/
+          test -s site/campaigns/blaze-packages.html
+          test -s site/campaigns/bollywood.html
+          test -s site/campaigns/campaign.css
+          test -s site/campaigns/campaign.js
+          test -s site/campaigns/campaign-settings.js
+          test -s site/assets/js/config.js
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
@@ -34,6 +46,7 @@ jobs:
         with:
           path: site
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
