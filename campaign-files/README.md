@@ -1,36 +1,35 @@
-# BLAZE SHOW — conversion campaign pages
+# BLAZE SHOW — two simple campaign pages
 
-These pages are separate landing pages added beside the existing GitHub Pages website.
+## Pages added
+- `campaigns/blaze-packages.html` — one main landing with 3 price packages:
+  - ECONOM / BLAZE MOMENT: 375,000 ₸ → 350,000 ₸ with coupon.
+  - STANDARD / BLAZE SIGNATURE: 800,000 ₸ → 775,000 ₸ with coupon.
+  - PREMIUM / BLAZE CELEBRATION: from 2,500,000 ₸ → from 2,475,000 ₸ with coupon.
+- `campaigns/bollywood.html` — separate product landing:
+  - Bollywood flashmob: 300,000 ₸ → 275,000 ₸ with coupon.
+  - Per-guest examples: 100 guests = 3,000 ₸; 300 guests = 1,000 ₸ before coupon.
+- Four-step quiz: event type, event date, venue/address, guest count. Phone is collected after those four answers.
 
-## Pages
-- `campaigns/blaze-packages.html` — packages, coupon and three interactive options.
-- `campaigns/bollywood.html` — standalone product landing for “Звёзды Болливуда”.
-- Shared CSS/JS are loaded from `campaigns/campaign.css` and `campaigns/campaign.js` and `campaigns/campaign-settings.js`.
+## Design approach
+Use the reference sites' structure, not their facts: clear first-screen offer, prominent coupon CTA, transparent prices, short proof/benefit blocks, a small FAQ and a direct phone form. Responsive light layout; the pages use the original BLAZE SHOW media already in the repository and the existing Wistia IDs.
 
-## Deploy
-GitHub Actions extracts the existing site bundle and copies these editable source files into `site/campaigns/`. Edit files in `campaign-files/` and commit to the deployment branch. Do not edit the compressed original archive just to change these campaign pages.
-
-After merge to main:
+## After merge to main
+GitHub Actions copies the editable files into the deployed site. Target URLs:
 - https://myleadmashine.github.io/blaze-show-site/campaigns/blaze-packages.html
 - https://myleadmashine.github.io/blaze-show-site/campaigns/bollywood.html
 
-## Before paid advertising
-1. Confirm the STANDARD 800,000 ₸ package composition in writing.
-2. Confirm the coupon rules and final net prices: MOMENT 350,000 ₸, STANDARD 775,000 ₸, CELEBRATION from 2,475,000 ₸ if the 25,000 ₸ coupon is applicable.
-3. Confirm the separate Bollywood price 300,000 ₸ and whether the coupon applies.
-4. Confirm the exact names, descriptions and price of each 300,000 ₸ interactive.
-5. Add the original Bollywood photo/video. The “same room / same people / same fixed camera / normal banquet light then disco light” block is a placeholder until the actual continuous video is inserted.
-6. Match each existing Wistia ID to its real video content; generic placeholders are intentionally used until the match is verified.
-7. Add real telephone / WhatsApp and a working endpoint in `assets/js/config.js`.
-8. Add actual GA4, Google Ads and Yandex Metrica IDs. The campaign code reads GA4 and Yandex Metrica IDs from that file. Microsoft Clarity is also optional.
-9. Add the actual public Marquiz URL to `campaign-files/campaign-settings.js` as `window.BLAZE_MARQUIZ_URL`. Until that is set, the “Подобрать программу” button opens the coupon form instead of a quiz.
-10. Verify that a real test lead reaches the receiving system and that the team calendar is updated. A browser page view is not proof that the lead delivery works.
+The current live main site is not overwritten by these pages.
 
-Analytics scripts load only after the visitor accepts the analytics banner. Declining analytics does not block the lead form.\n\n## Coupon and deposit
-The public offer describes a 25,000 ₸ discount and at least 10% deposit to reserve the date. The precise eligibility, expiry, payment schedule, refund/cancellation terms and what constitutes a confirmed reservation must be written into the proposal and contract. Do not describe the deposit as non-refundable unless that is expressly agreed and legally checked.
+## Required before paid traffic
+1. Verify the exact Wistia video IDs: `4nnek73dvf`, `sx1i8mpjne`, `7bjmxjnqsf`, `nwstr5fcgl`. The page uses them, but this build does not have authenticated access to Wistia's management names. Especially verify that the second Bollywood video is the continuous same-camera lighting transition clip.
+2. Put the confirmed BLAZE SHOW business WhatsApp number into `assets/js/config.js` as `contacts.whatsappNumber`, or deploy the receiving endpoint and set `leadDelivery.endpoint`. The form intentionally reports that it is not connected if both values are empty; it must not pretend a lead was delivered.
+3. Add real GA4, Google Ads and Yandex Metrica IDs to `assets/js/config.js`. Scripts load only after visitor consent.
+4. Verify package contents, especially STANDARD at 800,000 ₸ and the inclusion of hostesses, four batyrs, kudalar entrance, two paid dances and one bonus dance.
+5. Confirm the 25,000 ₸ coupon conditions and how it applies to each package in the quote/contract.
+6. The percentage “99% of guests join” is not shown as a statistic because no measurement evidence was provided. Use it only after collecting real event feedback.
 
-## Technical notes
-- The campaign pages reuse the existing Wistia IDs but do not claim their content labels are verified.
-- Lead form submits to `leadDelivery.endpoint` if configured. If there is no endpoint, it opens WhatsApp only when the corporate WhatsApp number is configured. It does not pretend to have stored the lead.
-- Interactive product names and descriptions are pending confirmation against actual Blaze repertoire.
-- The two references use different sales patterns. The accessible Provans site is used as a simple offer/coupon/three-price-level model. The IceStore site could not be fetched in the current research session; this standalone Bollywood page is therefore a product-first adaptation using the confirmed Blaze offer, not a pixel-identical copy.
+## Booking and deposit
+The page states a deposit from 10% after the programme, time slot, venue and terms are agreed and the contract is signed. A date/time is not shown as reserved before the deposit is received. Cancellation, refund and transfer terms belong in the signed contract.
+
+## Optional Marquiz
+The four-question built-in quiz works without Marquiz. If an external Marquiz quiz is also needed, add its public URL to `campaign-files/campaign-settings.js`; it remains optional and separate from the short coupon quiz.
