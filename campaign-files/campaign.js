@@ -47,7 +47,9 @@
   const modal = $('#quiz-modal');
   const openModal = (source, packageName='') => { if (!modal) return; const form = $('#coupon-form'); if (form) form.reset(); $('#quiz-questions').hidden = false; $('#quiz-contacts').hidden = true; $('#quiz-status').textContent = ''; showStep(1); const packageField = $('select[name=package], input[name=package]', form || document); if (packageField && packageName) packageField.value = packageName; modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); track('coupon_quiz_open',{source}); };
   const closeModal = () => { if (!modal) return; modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); };
-  $$('[data-open-quiz]').forEach(button => button.addEventListener('click', () => openModal(button.dataset.source || 'cta', button.dataset.package || '')));
+  $('[data-open-quiz]').forEach(button => button.addEventListener('click', () => openModal(button.dataset.source || 'cta', button.dataset.package || '')));
+  const marquizUrl = String(window.BLAZE_MARQUIZ_URL || '').trim();
+  $('[data-marquiz]').forEach(link => { if (marquizUrl) { link.href = marquizUrl; link.target = '_blank'; link.rel = 'noopener'; link.hidden = false; } else link.hidden = true; });
   $$('[data-close-quiz]').forEach(button => button.addEventListener('click', closeModal));
   if (modal) modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape') closeModal(); });
